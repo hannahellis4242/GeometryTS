@@ -16,13 +16,17 @@ const id2 = (): MatrixSquare2 => [
 ];
 
 const det = ([[a, b], [c, d]]: MatrixSquare2): number => a * d - b * c;
-const add = (
-  [[a00, a01], [a10, a11]]: MatrixSquare2,
-  [[b00, b01], [b10, b11]]: MatrixSquare2
-): MatrixSquare2 => [
-  [a00 + b00, a01 + b01],
-  [a10 + b10, a11 + b11],
-];
+const add = (...matrices: MatrixSquare2[]): MatrixSquare2 =>
+  matrices.reduce(
+    (
+      [[a00, a01], [a10, a11]]: MatrixSquare2,
+      [[b00, b01], [b10, b11]]: MatrixSquare2
+    ): MatrixSquare2 => [
+      [a00 + b00, a01 + b01],
+      [a10 + b10, a11 + b11],
+    ],
+    matrixSquare2(0, 0, 0, 0)
+  );
 
 describe("MatrixSquare2", () => {
   test("can create a matrix", () => {
@@ -69,5 +73,27 @@ describe("MatrixSquare2", () => {
     expect(m3[0][1]).toBe(b + f);
     expect(m3[1][0]).toBe(c + g);
     expect(m3[1][1]).toBe(d + h);
+  });
+  test("can add three matrices", () => {
+    const a = randomFloat(-200, 200);
+    const b = randomFloat(-200, 200);
+    const c = randomFloat(-200, 200);
+    const d = randomFloat(-200, 200);
+    const e = randomFloat(-200, 200);
+    const f = randomFloat(-200, 200);
+    const g = randomFloat(-200, 200);
+    const h = randomFloat(-200, 200);
+    const i = randomFloat(-200, 200);
+    const j = randomFloat(-200, 200);
+    const k = randomFloat(-200, 200);
+    const l = randomFloat(-200, 200);
+    const m1 = matrixSquare2(a, b, c, d);
+    const m2 = matrixSquare2(e, f, g, h);
+    const m3 = matrixSquare2(i, j, k, l);
+    const m4 = add(m1, m2, m3);
+    expect(m4[0][0]).toBe(a + e + i);
+    expect(m4[0][1]).toBe(b + f + j);
+    expect(m4[1][0]).toBe(c + g + k);
+    expect(m4[1][1]).toBe(d + h + l);
   });
 });
