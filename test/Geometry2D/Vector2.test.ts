@@ -128,4 +128,12 @@ describe("Vector2", () => {
       expect(y(v)).toBe(b);
     });
   });
+  test("can multiply a vector by a scala", () => {
+    const x = randomInt(-2000, 200);
+    const y = randomInt(-2000, 200);
+    const scale = randomFloat(-200, 200);
+    const result = mult(scale, vector2(x, y));
+    expect(result.x).toBe(scale * x);
+    expect(result.y).toBe(scale * y);
+  });
 });
