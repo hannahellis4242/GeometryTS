@@ -1,2 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.helloWorld = void 0;
 const helloWorld = () => "Hello, world!";
-export default helloWorld;
+exports.helloWorld = helloWorld;
