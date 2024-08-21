@@ -1,4 +1,5 @@
 import { randomInt } from "crypto";
+import { randomFloat } from "../utils";
 
 interface Vector2 {
   readonly x: number;
@@ -6,9 +7,13 @@ interface Vector2 {
 }
 
 const vector2 = (x: number, y: number): Vector2 => ({ x, y });
-const origin2 = () => vector2(0, 0);
-const add = (...vs: Vector2[]) =>
+const origin2 = (): Vector2 => vector2(0, 0);
+const add = (...vs: Vector2[]): Vector2 =>
   vs.reduce((a, b) => ({ x: a.x + b.x, y: a.y + b.y }), origin2());
+const mult = (scale: number, { x, y }: Vector2): Vector2 => ({
+  x: scale * x,
+  y: scale * y,
+});
 
 describe("Vector2", () => {
   test("can create a vector", () => {
@@ -47,5 +52,13 @@ describe("Vector2", () => {
     const result = add(v1, v2, v3);
     expect(result.x).toBe(x1 + x2 + x3);
     expect(result.y).toBe(y1 + y2 + y3);
+  });
+  test("can multiply a vector by a scala", () => {
+    const x = randomInt(-2000, 200);
+    const y = randomInt(-2000, 200);
+    const scale = randomFloat(-200, 200);
+    const result = mult(scale, vector2(x, y));
+    expect(result.x).toBe(scale * x);
+    expect(result.y).toBe(scale * y);
   });
 });
