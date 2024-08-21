@@ -1,28 +1,17 @@
 import { randomFloat } from "../utils";
-
-interface Vector2 {
-  readonly x: number;
-  readonly y: number;
-}
-
-const vector2 = (x: number, y: number): Vector2 => ({ x, y });
-const origin2 = (): Vector2 => vector2(0, 0);
-const xAxis2 = (x: number): Vector2 => vector2(x, 0);
-const yAxis2 = (y: number): Vector2 => vector2(0, y);
-const add = (...vs: Vector2[]): Vector2 =>
-  vs.reduce((a, b) => ({ x: a.x + b.x, y: a.y + b.y }), origin2());
-const sub = (a: Vector2, b: Vector2) => add(a, mult(-1, b));
-const mult = (scale: number, { x, y }: Vector2): Vector2 => ({
-  x: scale * x,
-  y: scale * y,
-});
-const div = ({ x, y }: Vector2, scale: number): Vector2 => ({
-  x: x / scale,
-  y: y / scale,
-});
-const fromTo = (a: Vector2, b: Vector2): Vector2 => sub(b, a);
-const dot = (a: Vector2, b: Vector2): number => a.x * b.x + a.y * b.y;
-const cross = (a: Vector2, b: Vector2): number => a.x * b.y - a.y * b.x;
+import {
+  add,
+  cross,
+  div,
+  dot,
+  fromTo,
+  mult,
+  origin2,
+  sub,
+  vector2,
+  xAxis2,
+  yAxis2,
+} from "../../src/Geomerty2D/Vector2";
 
 describe("Vector2", () => {
   test("can create a vector", () => {
