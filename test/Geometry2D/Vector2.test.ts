@@ -17,11 +17,11 @@ import {
 
 describe("Vector2", () => {
   test("can create a vector", () => {
-    const a = randomFloat(-2000, 200);
-    const b = randomFloat(-2000, 200);
-    const [x, y] = vector2(a, b);
-    expect(x).toBe(a);
-    expect(y).toBe(b);
+    const x = randomInt(-2000, 200);
+    const y = randomInt(-2000, 200);
+    const result = vector2(x, y);
+    expect(result.x).toBe(x);
+    expect(result.y).toBe(y);
   });
   test("can create an origin position vector", () => {
     const [x, y] = origin2();
@@ -128,12 +128,28 @@ describe("Vector2", () => {
       expect(y(v)).toBe(b);
     });
   });
-  test("can multiply a vector by a scala", () => {
-    const x = randomInt(-2000, 200);
-    const y = randomInt(-2000, 200);
+  test("can multiply a vector by a scalar", () => {
+    const x = randomFloat(-2000, 200);
+    const y = randomFloat(-2000, 200);
     const scale = randomFloat(-200, 200);
     const result = mult(scale, vector2(x, y));
     expect(result.x).toBe(scale * x);
     expect(result.y).toBe(scale * y);
+  });
+  test("can divide a vector by a scalar", () => {
+    const x = randomFloat(-2000, 200);
+    const y = randomFloat(-2000, 200);
+    const scale = randomFloat(-200, 200);
+    const result = div(vector2(x, y), scale);
+    expect(result.x).toBe(x / scale);
+    expect(result.y).toBe(y / scale);
+  });
+  test("can do a dot product", () => {
+    const x1 = randomFloat(-2000, 200);
+    const y1 = randomFloat(-2000, 200);
+    const x2 = randomFloat(-2000, 200);
+    const y2 = randomFloat(-2000, 200);
+    const result = dot(vector2(x1, y1), vector2(x2, y2));
+    expect(result).toBe(x1 * x2 + y1 * y2);
   });
 });
