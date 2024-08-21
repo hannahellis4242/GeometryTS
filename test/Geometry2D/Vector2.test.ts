@@ -128,6 +128,17 @@ describe("Vector2", () => {
       expect(y(v)).toBe(b);
     });
   });
+  test("can subtract two vectors", () => {
+    const x1 = randomFloat(-2000, 200);
+    const y1 = randomFloat(-2000, 200);
+    const x2 = randomFloat(-2000, 200);
+    const y2 = randomFloat(-2000, 200);
+    const v1 = vector2(x1, y1);
+    const v2 = vector2(x2, y2);
+    const result = sub(v1, v2);
+    expect(result.x).toBe(x1 - x2);
+    expect(result.y).toBe(y1 - y2);
+  });
   test("can multiply a vector by a scalar", () => {
     const x = randomFloat(-2000, 200);
     const y = randomFloat(-2000, 200);
@@ -151,5 +162,22 @@ describe("Vector2", () => {
     const y2 = randomFloat(-2000, 200);
     const result = dot(vector2(x1, y1), vector2(x2, y2));
     expect(result).toBe(x1 * x2 + y1 * y2);
+  });
+  test("can get a vector from one position vector to another", () => {
+    const x1 = randomFloat(-2000, 200);
+    const y1 = randomFloat(-2000, 200);
+    const x2 = randomFloat(-2000, 200);
+    const y2 = randomFloat(-2000, 200);
+    const { x, y } = fromTo(vector2(x1, y1), vector2(x2, y2));
+    expect(x).toBe(x2 - x1);
+    expect(y).toBe(y2 - y1);
+  });
+  test("can do a cross product", () => {
+    const a1 = randomFloat(-2000, 200);
+    const a2 = randomFloat(-2000, 200);
+    const b1 = randomFloat(-2000, 200);
+    const b2 = randomFloat(-2000, 200);
+    const result = cross(vector2(a1, a2), vector2(b1, b2));
+    expect(result).toBe(a1 * b2 - a2 * b1);
   });
 });
