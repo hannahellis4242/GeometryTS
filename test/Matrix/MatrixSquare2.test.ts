@@ -27,6 +27,13 @@ const add = (...matrices: MatrixSquare2[]): MatrixSquare2 =>
     ],
     matrixSquare2(0, 0, 0, 0)
   );
+const multMM = (
+  [[a00, a01], [a10, a11]]: MatrixSquare2,
+  [[b00, b01], [b10, b11]]: MatrixSquare2
+): MatrixSquare2 => [
+  [a00 * b00 + a01 * b10, a00 * b01 + a01 * b11],
+  [a10 * b00 + a11 * b10, a10 * b01 + a11 * b11],
+];
 
 describe("MatrixSquare2", () => {
   test("can create a matrix", () => {
@@ -95,5 +102,14 @@ describe("MatrixSquare2", () => {
     expect(m4[0][1]).toBe(b + f + j);
     expect(m4[1][0]).toBe(c + g + k);
     expect(m4[1][1]).toBe(d + h + l);
+  });
+  test("can multiply to matrices", () => {
+    const m1 = matrixSquare2(5, 6, 1, 2);
+    const m2 = matrixSquare2(-2, 3, 1, 3);
+    const [[a, b], [c, d]] = multMM(m1, m2);
+    expect(a).toBe(-4);
+    expect(b).toBe(33);
+    expect(c).toBe(0);
+    expect(d).toBe(9);
   });
 });
