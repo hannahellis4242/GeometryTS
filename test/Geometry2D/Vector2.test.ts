@@ -1,4 +1,3 @@
-import { randomInt } from "crypto";
 import { randomFloat } from "../utils";
 
 interface Vector2 {
@@ -14,11 +13,16 @@ const mult = (scale: number, { x, y }: Vector2): Vector2 => ({
   x: scale * x,
   y: scale * y,
 });
+const div = ({ x, y }: Vector2, scale: number): Vector2 => ({
+  x: x / scale,
+  y: y / scale,
+});
+const dot = (a: Vector2, b: Vector2): number => a.x * b.x + a.y * b.y;
 
 describe("Vector2", () => {
   test("can create a vector", () => {
-    const x = randomInt(-2000, 200);
-    const y = randomInt(-2000, 200);
+    const x = randomFloat(-2000, 200);
+    const y = randomFloat(-2000, 200);
     const result = vector2(x, y);
     expect(result.x).toBe(x);
     expect(result.y).toBe(y);
@@ -29,10 +33,10 @@ describe("Vector2", () => {
     expect(y).toBe(0);
   });
   test("can add two vectors", () => {
-    const x1 = randomInt(-2000, 200);
-    const y1 = randomInt(-2000, 200);
-    const x2 = randomInt(-2000, 200);
-    const y2 = randomInt(-2000, 200);
+    const x1 = randomFloat(-2000, 200);
+    const y1 = randomFloat(-2000, 200);
+    const x2 = randomFloat(-2000, 200);
+    const y2 = randomFloat(-2000, 200);
     const v1 = vector2(x1, y1);
     const v2 = vector2(x2, y2);
     const result = add(v1, v2);
@@ -40,12 +44,12 @@ describe("Vector2", () => {
     expect(result.y).toBe(y1 + y2);
   });
   test("can add three vectors", () => {
-    const x1 = randomInt(-2000, 200);
-    const y1 = randomInt(-2000, 200);
-    const x2 = randomInt(-2000, 200);
-    const y2 = randomInt(-2000, 200);
-    const x3 = randomInt(-2000, 200);
-    const y3 = randomInt(-2000, 200);
+    const x1 = randomFloat(-2000, 200);
+    const y1 = randomFloat(-2000, 200);
+    const x2 = randomFloat(-2000, 200);
+    const y2 = randomFloat(-2000, 200);
+    const x3 = randomFloat(-2000, 200);
+    const y3 = randomFloat(-2000, 200);
     const v1 = vector2(x1, y1);
     const v2 = vector2(x2, y2);
     const v3 = vector2(x3, y3);
@@ -53,12 +57,28 @@ describe("Vector2", () => {
     expect(result.x).toBe(x1 + x2 + x3);
     expect(result.y).toBe(y1 + y2 + y3);
   });
-  test("can multiply a vector by a scala", () => {
-    const x = randomInt(-2000, 200);
-    const y = randomInt(-2000, 200);
+  test("can multiply a vector by a scalar", () => {
+    const x = randomFloat(-2000, 200);
+    const y = randomFloat(-2000, 200);
     const scale = randomFloat(-200, 200);
     const result = mult(scale, vector2(x, y));
     expect(result.x).toBe(scale * x);
     expect(result.y).toBe(scale * y);
+  });
+  test("can divide a vector by a scalar", () => {
+    const x = randomFloat(-2000, 200);
+    const y = randomFloat(-2000, 200);
+    const scale = randomFloat(-200, 200);
+    const result = div(vector2(x, y), scale);
+    expect(result.x).toBe(x / scale);
+    expect(result.y).toBe(y / scale);
+  });
+  test("can do a dot product", () => {
+    const x1 = randomFloat(-2000, 200);
+    const y1 = randomFloat(-2000, 200);
+    const x2 = randomFloat(-2000, 200);
+    const y2 = randomFloat(-2000, 200);
+    const result = dot(vector2(x1, y1), vector2(x2, y2));
+    expect(result).toBe(x1 * x2 + y1 * y2);
   });
 });
