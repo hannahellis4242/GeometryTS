@@ -11,7 +11,7 @@ import {
   vector2,
   xAxis2,
   yAxis2,
-} from "../../src/Geomerty2D/Vector2";
+} from "../../src/Geometry2D/Vector2D";
 
 describe("Vector2", () => {
   test("can create a vector", () => {
