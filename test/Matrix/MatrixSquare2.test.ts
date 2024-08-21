@@ -1,3 +1,4 @@
+import Vector2 from "../../src/Geometry2D/Vector2D";
 import { randomFloat } from "../utils";
 
 type MatrixSquare2 = [[number, number], [number, number]];
@@ -34,7 +35,10 @@ const multMM = (
   [a00 * b00 + a01 * b10, a00 * b01 + a01 * b11],
   [a10 * b00 + a11 * b10, a10 * b01 + a11 * b11],
 ];
-
+const multMV = (
+  [[a00, a01], [a10, a11]]: MatrixSquare2,
+  [b0, b1]: Vector2
+): Vector2 => [a00 * b0 + a01 * b1, a10 * b0 + a11 * b1];
 describe("MatrixSquare2", () => {
   test("can create a matrix", () => {
     const a = randomFloat(-200, 200);
