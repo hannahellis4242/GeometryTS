@@ -40,6 +40,22 @@ const multMV = (
   [b0, b1]: Vector2
 ): Vector2 => [a00 * b0 + a01 * b1, a10 * b0 + a11 * b1];
 
+const multSM = (
+  scale: number,
+  [[a00, a01], [a10, a11]]: MatrixSquare2
+): MatrixSquare2 => [
+  [scale * a00, scale * a01],
+  [scale * a10, scale * a11],
+];
+
+const inverse = (a: MatrixSquare2): MatrixSquare2 =>
+  multSM(1 / det(a), [
+    [a[1][1], -a[0][1]],
+    [-a[1][0], a[0][0]],
+  ]);
+
+const solve = (m: MatrixSquare2, b: Vector2): Vector2 => multMV(inverse(m), b);
+
 describe("MatrixSquare2", () => {
   test("can create a matrix", () => {
     const a = randomFloat(-200, 200);
