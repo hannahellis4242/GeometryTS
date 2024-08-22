@@ -2,11 +2,10 @@
   "name": "geometry-ts",
   "version": "0.0.1",
   "description": "A module for doing geometric calculations",
-  "main": "dist/main.js",
-  "types": "dist/main.d.ts",
+  "main": "lib/main.js",
+  "types": "lib/main.d.ts",
   "scripts": {
     "test": "jest",
-    "test-watch": "jest -w",
     "build": "tsc",
     "watch": "tsc -w"
   },
