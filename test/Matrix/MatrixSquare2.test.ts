@@ -1,4 +1,4 @@
-import Vector2 from "../../src/Geometry2D/Vector2D";
+import Vector2, { vector2 } from "../../src/Geometry2D/Vector2D";
 import { randomFloat } from "../utils";
 
 type MatrixSquare2 = [[number, number], [number, number]];
@@ -39,6 +39,7 @@ const multMV = (
   [[a00, a01], [a10, a11]]: MatrixSquare2,
   [b0, b1]: Vector2
 ): Vector2 => [a00 * b0 + a01 * b1, a10 * b0 + a11 * b1];
+
 describe("MatrixSquare2", () => {
   test("can create a matrix", () => {
     const a = randomFloat(-200, 200);
@@ -107,7 +108,7 @@ describe("MatrixSquare2", () => {
     expect(m4[1][0]).toBe(c + g + k);
     expect(m4[1][1]).toBe(d + h + l);
   });
-  test("can multiply to matrices", () => {
+  test("can multiply two matrices", () => {
     const m1 = matrixSquare2(5, 6, 1, 2);
     const m2 = matrixSquare2(-2, 3, 1, 3);
     const [[a, b], [c, d]] = multMM(m1, m2);
@@ -115,5 +116,12 @@ describe("MatrixSquare2", () => {
     expect(b).toBe(33);
     expect(c).toBe(0);
     expect(d).toBe(9);
+  });
+  test("can multiply a matrix and a vector", () => {
+    const m = matrixSquare2(5, 6, 1, 2);
+    const v = vector2(5, 4);
+    const [x, y] = multMV(m, v);
+    expect(x).toBe(49);
+    expect(y).toBe(13);
   });
 });
