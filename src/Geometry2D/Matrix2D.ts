@@ -17,7 +17,7 @@ export const id2 = (): Matrix2D => [
   [0, 1],
 ];
 
-export const det = ([[a, b], [c, d]]: Matrix2D): number => a * d - b * c;
+export const det2 = ([[a, b], [c, d]]: Matrix2D): number => a * d - b * c;
 export const addMM = (...matrices: Matrix2D[]): Matrix2D =>
   matrices.reduce(
     (
@@ -50,7 +50,7 @@ export const multSM = (
 ];
 
 export const inverse = (a: Matrix2D): Matrix2D =>
-  multSM(1 / det(a), [
+  multSM(1 / det2(a), [
     [a[1][1], -a[0][1]],
     [-a[1][0], a[0][0]],
   ]);

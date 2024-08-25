@@ -13,7 +13,7 @@ import {
 } from "./Geometry2D/Vector2D";
 import {
   addMM,
-  det,
+  det2,
   id2,
   inverse,
   matrix2D,
@@ -38,7 +38,7 @@ export const Vector2D = {
 export const Matrix2D = {
   matrix2D,
   id2,
-  det,
+  det: det2,
   addMM,
   multMM,
   multMV,

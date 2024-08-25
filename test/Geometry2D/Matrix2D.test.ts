@@ -1,7 +1,7 @@
 import { vector2 } from "../../src/Geometry2D/Vector2D";
 import { randomFloat } from "../utils";
 import {
-  det,
+  det2,
   id2,
   matrix2D,
   multMM,
@@ -35,7 +35,7 @@ describe("Matrix2D", () => {
     const c = randomFloat(-200, 200);
     const d = randomFloat(-200, 200);
     const matrix = matrix2D(a, b, c, d);
-    const determinant = det(matrix);
+    const determinant = det2(matrix);
     expect(determinant).toBe(a * d - b * c);
   });
 
