@@ -1,5 +1,5 @@
 import {
-  add,
+  addVV,
   cross,
   div,
   dot,
@@ -16,7 +16,7 @@ const Geometry2D = {
   origin2,
   xAxis2,
   yAxis2,
-  add,
+  add: addVV,
   sub,
   mult,
   div,

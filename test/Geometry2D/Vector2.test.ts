@@ -1,6 +1,6 @@
 import { randomFloat } from "../utils";
 import {
-  add,
+  addVV,
   cross,
   div,
   dot,
@@ -47,7 +47,7 @@ describe("Vector2", () => {
     const y2 = randomFloat(-2000, 200);
     const v1 = vector2(x1, y1);
     const v2 = vector2(x2, y2);
-    const [x, y] = add(v1, v2);
+    const [x, y] = addVV(v1, v2);
     expect(x).toBe(x1 + x2);
     expect(y).toBe(y1 + y2);
   });
@@ -61,7 +61,7 @@ describe("Vector2", () => {
     const v1 = vector2(x1, y1);
     const v2 = vector2(x2, y2);
     const v3 = vector2(x3, y3);
-    const [x, y] = add(v1, v2, v3);
+    const [x, y] = addVV(v1, v2, v3);
     expect(x).toBe(x1 + x2 + x3);
     expect(y).toBe(y1 + y2 + y3);
   });
