@@ -140,4 +140,11 @@ describe("MatrixSquare2", () => {
     expect(x).toBe(49);
     expect(y).toBe(13);
   });
+  test("can solve system of equations", () => {
+    const m = matrixSquare2(1, 3, 4, -2);
+    const b = vector2(17, -2);
+    const a = solve(m, b);
+    expect(a[0]).toBeCloseTo(2);
+    expect(a[1]).toBe(5);
+  });
 });

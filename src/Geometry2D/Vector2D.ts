@@ -21,3 +21,5 @@ export const dot = (a: Vector2, b: Vector2): number =>
   a[0] * b[0] + a[1] * b[1];
 export const cross = (a: Vector2, b: Vector2): number =>
   a[0] * b[1] - a[1] * b[0];
+export const x = ([a, _]: Vector2): number => a;
+export const y = ([_, b]: Vector2): number => b;

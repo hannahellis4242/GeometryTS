@@ -9,7 +9,9 @@ import {
   origin2,
   sub,
   vector2,
+  x,
   xAxis2,
+  y,
   yAxis2,
 } from "../../src/Geometry2D/Vector2D";
 
@@ -114,5 +116,16 @@ describe("Vector2", () => {
     const b2 = randomFloat(-2000, 200);
     const result = cross(vector2(a1, a2), vector2(b1, b2));
     expect(result).toBe(a1 * b2 - a2 * b1);
+  });
+  describe("can extract the components from a vector", () => {
+    const a = randomFloat(-2000, 2000);
+    const b = randomFloat(-2000, 2000);
+    const v = vector2(a, b);
+    test("x component", () => {
+      expect(x(v)).toBe(a);
+    });
+    test("y component", () => {
+      expect(y(v)).toBe(b);
+    });
   });
 });
