@@ -1,5 +1,5 @@
 import { randomFloat } from "../utils";
-import { det2 } from "../../src/Geometry2D/Matrix2D";
+import { det2, inverse } from "../../src/Geometry2D/Matrix2D";
 import Vector3D, { dot3, vector3D } from "../../src/Geometry3D/Vector3D";
 
 type Matrix3D = [
@@ -45,6 +45,69 @@ const MV3 = (
   [[a, b, c], [d, e, f], [g, h, i]]: Matrix3D,
   v: Vector3D
 ): Vector3D => [dot3([a, b, c], v), dot3([d, e, f], v), dot3([g, h, i], v)];
+
+const SM3 = (
+  s: number,
+  [[a, b, c], [d, e, f], [g, h, i]]: Matrix3D
+): Matrix3D => [
+  [s * a, s * b, s * c],
+  [s * d, s * e, s * f],
+  [s * g, s * h, s * i],
+];
+
+const inverse3 = ([[a, b, c], [d, e, f], [g, h, i]]: Matrix3D): Matrix3D =>
+  SM3(
+    1.0 /
+      det3([
+        [a, b, c],
+        [d, e, f],
+        [g, h, i],
+      ]),
+    [
+      [
+        det2([
+          [e, f],
+          [h, i],
+        ]),
+        -det2([
+          [b, c],
+          [h, i],
+        ]),
+        det2([
+          [b, c],
+          [e, f],
+        ]),
+      ],
+      [
+        -det2([
+          [d, f],
+          [g, i],
+        ]),
+        det2([
+          [a, c],
+          [g, i],
+        ]),
+        -det2([
+          [a, c],
+          [d, f],
+        ]),
+      ],
+      [
+        det2([
+          [d, e],
+          [g, h],
+        ]),
+        -det2([
+          [a, b],
+          [g, h],
+        ]),
+        det2([
+          [a, b],
+          [d, e],
+        ]),
+      ],
+    ]
+  );
 
 describe("Matrix3D", () => {
   test("can create a matrix", () => {
@@ -116,5 +179,66 @@ describe("Matrix3D", () => {
     expect(u[0]).toBe(a * x + b * y + c * z);
     expect(u[1]).toBe(d * x + e * y + f * z);
     expect(u[2]).toBe(g * x + h * y + i * z);
+  });
+
+  test("can multiply a matrix by a scalar", () => {
+    const a = randomFloat(-5000, 5000);
+    const b = randomFloat(-5000, 5000);
+    const c = randomFloat(-5000, 5000);
+
+    const d = randomFloat(-5000, 5000);
+    const e = randomFloat(-5000, 5000);
+    const f = randomFloat(-5000, 5000);
+
+    const g = randomFloat(-5000, 5000);
+    const h = randomFloat(-5000, 5000);
+    const i = randomFloat(-5000, 5000);
+
+    const s = randomFloat(-5000, 5000);
+
+    const m = matrix3D(a, b, c, d, e, f, g, h, i);
+
+    const result = SM3(s, m);
+    expect(result[0][0]).toBe(s * a);
+    expect(result[0][1]).toBe(s * b);
+    expect(result[0][2]).toBe(s * c);
+
+    expect(result[1][0]).toBe(s * d);
+    expect(result[1][1]).toBe(s * e);
+    expect(result[1][2]).toBe(s * f);
+
+    expect(result[2][0]).toBe(s * g);
+    expect(result[2][1]).toBe(s * h);
+    expect(result[2][2]).toBe(s * i);
+  });
+
+  test("can invert a matrix", () => {
+    const a = randomFloat(-5000, 5000);
+    const b = randomFloat(-5000, 5000);
+    const c = randomFloat(-5000, 5000);
+
+    const d = randomFloat(-5000, 5000);
+    const e = randomFloat(-5000, 5000);
+    const f = randomFloat(-5000, 5000);
+
+    const g = randomFloat(-5000, 5000);
+    const h = randomFloat(-5000, 5000);
+    const i = randomFloat(-5000, 5000);
+
+    const m = matrix3D(a, b, c, d, e, f, g, h, i);
+
+    const result = inverse3(m);
+    const det = det3(m);
+    expect(result[0][0]).toBeCloseTo((e * i - f * h) / det);
+    expect(result[0][1]).toBeCloseTo((c * h - b * i) / det);
+    expect(result[0][2]).toBeCloseTo((b * f - c * e) / det);
+
+    expect(result[1][0]).toBeCloseTo((f * g - d * i) / det);
+    expect(result[1][1]).toBeCloseTo((a * i - c * g) / det);
+    expect(result[1][2]).toBeCloseTo((c * d - a * f) / det);
+
+    expect(result[2][0]).toBeCloseTo((d * h - e * g) / det);
+    expect(result[2][1]).toBeCloseTo((b * g - a * h) / det);
+    expect(result[2][2]).toBeCloseTo((a * e - b * d) / det);
   });
 });
