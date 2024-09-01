@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 declare const Geometry2D: {
 <<<<<<< HEAD
   Vector2D: {
@@ -77,5 +78,13 @@ declare const Geometry2D: {
     dot: (a: import("./Geometry2D/Vector2D").default, b: import("./Geometry2D/Vector2D").default) => number;
     cross: (a: import("./Geometry2D/Vector2D").default, b: import("./Geometry2D/Vector2D").default) => number;
 >>>>>>> 8509f3d (packaging)
+=======
+import { Geometry2D } from "./Geometry2D";
+import { Geometry3D } from "./Geometry3D";
+declare const Coord: {
+    x: (v: import("./Geometry2D/Vector2D").default | import("./Geometry3D/Vector3D").default) => number;
+    y: (v: import("./Geometry2D/Vector2D").default | import("./Geometry3D/Vector3D").default) => number;
+    z: (v: import("./Geometry3D/Vector3D").default) => number;
+>>>>>>> 6277783 (setting up lib)
 };
-export { Geometry2D };
+export { Coord, Geometry2D, Geometry3D };
