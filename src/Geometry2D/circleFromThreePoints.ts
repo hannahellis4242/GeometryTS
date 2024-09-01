@@ -28,7 +28,7 @@ const convertParams = ([A, B, C]: Vector3): Circle => {
   const cx = -A / 2;
   const cy = -B / 2;
   const r = Math.sqrt(A * A + B * B - 4 * C) / 2;
-  return new Circle(cx, cy, r);
+  return new Circle([cx, cy], r);
 };
 
 const circleFromThreePoints = (p1: Vector2, p2: Vector2, p3: Vector2): Circle =>

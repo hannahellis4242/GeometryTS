@@ -11,9 +11,9 @@ namespace CircleFromThreePointsTest {
   }
 
   const checkCircle = (result: Circle, expected: Circle) => {
-    expect(result.x).toBeCloseTo(expected.x);
-    expect(result.y).toBeCloseTo(expected.y);
-    expect(result.r).toBeCloseTo(expected.r);
+    expect(result.centre[0]).toBeCloseTo(expected.centre[0]);
+    expect(result.centre[1]).toBeCloseTo(expected.centre[1]);
+    expect(result.radius).toBeCloseTo(expected.radius);
   };
 
   describe("circle from three points", () => {
@@ -22,13 +22,13 @@ namespace CircleFromThreePointsTest {
         point1: vector2(0, 0),
         point2: vector2(1, 1),
         point3: vector2(0, 2),
-        expectedCircle: new Circle(0, 1, 1),
+        expectedCircle: new Circle([0, 1], 1),
       },
       {
         point1: vector2(1, 1),
         point2: vector2(2.5, 1.5),
         point3: vector2(1, 2),
-        expectedCircle: new Circle(5 / 3, 3 / 2, Math.sqrt(0.694444444)),
+        expectedCircle: new Circle([5 / 3, 3 / 2], Math.sqrt(0.694444444)),
       },
     ];
 
