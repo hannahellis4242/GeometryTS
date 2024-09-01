@@ -1,66 +1,6 @@
-import Vector2, { cross, dot, vector2 } from "../../src/Geometry2D/Vector2D";
-
-interface Shape {}
-class Circle implements Shape {
-  constructor(
-    public readonly x: number,
-    public readonly y: number,
-    public readonly r: number
-  ) {}
-}
-const circleFromThreePoints = (p1: Vector2, p2: Vector2, p3: Vector2): Circle =>
-  convertParams(getParams(p1, p2, p3));
-
-type Matrix3 = [
-  [number, number, number],
-  [number, number, number],
-  [number, number, number]
-];
-
-type Vector3 = [number, number, number];
-
-const dot3 = (a: Vector3, b: Vector3): number =>
-  a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
-
-const MV3 = (m: Matrix3, v: Vector3): Vector3 => [
-  dot3(m[0], v),
-  dot3(m[1], v),
-  dot3(m[2], v),
-];
-
-const x = (v: Vector2 | Vector3): number => v[0];
-const y = (v: Vector2 | Vector3): number => v[1];
-const z = (v: Vector3): number => v[2];
-
-const createMatrix = (p1: Vector2, p2: Vector2, p3: Vector2): Matrix3 => [
-  [y(p2) - y(p3), y(p3) - y(p1), y(p1) - y(p2)],
-  [x(p3) - x(p2), x(p1) - x(p3), x(p2) - x(p1)],
-  [cross(p2, p3), cross(p3, p1), cross(p1, p2)],
-];
-
-const createVector = (p1: Vector2, p2: Vector2, p3: Vector2): Vector3 => [
-  dot(p1, p1),
-  dot(p2, p2),
-  dot(p3, p3),
-];
-
-const createScala = (p1: Vector2, p2: Vector2, p3: Vector2): number =>
-  (x(p2) - x(p1)) * y(p3) + (x(p1) - x(p3)) * y(p2) + (x(p3) - x(p2)) * y(p1);
-
-const SV3 = (s: number, [x, y, z]: Vector3): Vector3 => [s * x, s * y, s * z];
-
-const getParams = (p1: Vector2, p2: Vector2, p3: Vector2): Vector3 =>
-  SV3(
-    -1 / createScala(p1, p2, p3),
-    MV3(createMatrix(p1, p2, p3), createVector(p1, p2, p3))
-  );
-
-const convertParams = ([A, B, C]: Vector3): Circle => {
-  const cx = -A / 2;
-  const cy = -B / 2;
-  const r = Math.sqrt(A * A + B * B - 4 * C) / 2;
-  return new Circle(cx, cy, r);
-};
+import Vector2, { vector2 } from "../../src/Geometry2D/Vector2D";
+import Circle from "../../src/Geometry2D/Circle";
+import circleFromThreePoints from "../../src/Geometry2D/circleFromThreePoints";
 
 namespace CircleFromThreePointsTest {
   interface Params {

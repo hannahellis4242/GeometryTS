@@ -4,9 +4,9 @@ const Geometry2D = { Vector2D, Matrix2D };
 =======
 import {
   add,
-  cross,
+  cross2,
   div,
-  dot,
+  dot2,
   fromTo,
   mult,
   origin2,
@@ -25,8 +25,8 @@ const Geometry2D = {
   mult,
   div,
   fromTo,
-  dot,
-  cross,
+  dot: dot2,
+  cross: cross2,
 };
 >>>>>>> 8509f3d (packaging)
 export { Geometry2D };
