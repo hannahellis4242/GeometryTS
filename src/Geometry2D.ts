@@ -1,8 +1,8 @@
 import {
   addVV,
-  cross,
+  cross2,
   div,
-  dot,
+  dot2,
   fromTo,
   mult,
   origin2,
@@ -11,38 +11,21 @@ import {
   xAxis2,
   yAxis2,
 } from "./Geometry2D/Vector2D";
-import {
-  addMM,
-  det,
-  id2,
-  inverse,
-  matrix2D,
-  multMM,
-  multMV,
-  multSM,
-  solve,
-} from "./Geometry2D/Matrix2D";
-export const Vector2D = {
+import Circle from "./Geometry2D/Circle";
+import circleFromThreePoints from "./Geometry2D/circleFromThreePoints";
+const Geometry2D = {
   vector2,
   origin2,
   xAxis2,
   yAxis2,
-  add: addVV,
+  addVV,
   sub,
   mult,
   div,
   fromTo,
-  dot,
-  cross,
+  dot2,
+  cross2,
+  Circle,
+  circleFromThreePoints,
 };
-export const Matrix2D = {
-  matrix2D,
-  id2,
-  det,
-  addMM,
-  multMM,
-  multMV,
-  multSM,
-  inverse,
-  solve,
-};
+export { Geometry2D };

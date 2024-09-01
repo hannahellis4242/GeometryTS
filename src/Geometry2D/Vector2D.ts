@@ -16,10 +16,12 @@ export const div = ([x, y]: Vector2, scale: number): Vector2 => [
   x / scale,
   y / scale,
 ];
-export const fromTo = (a: Vector2, b: Vector2): Vector2 => sub(b, a);
-export const dot = (a: Vector2, b: Vector2): number =>
+
+export const dot2 = (a: Vector2, b: Vector2): number =>
   a[0] * b[0] + a[1] * b[1];
-export const cross = (a: Vector2, b: Vector2): number =>
+export const cross2 = (a: Vector2, b: Vector2): number =>
   a[0] * b[1] - a[1] * b[0];
 export const x = ([a, _]: Vector2): number => a;
 export const y = ([_, b]: Vector2): number => b;
+
+export const fromTo = (a: Vector2, b: Vector2): Vector2 => sub(b, a);

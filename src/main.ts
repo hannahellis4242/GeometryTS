@@ -1,3 +1,7 @@
-import { Vector2D, Matrix2D } from "./Geometry2D";
-const Geometry2D = { Vector2D, Matrix2D };
-export { Geometry2D };
+import { x, y, z } from "./Coord";
+import { Geometry2D } from "./Geometry2D";
+import { Geometry3D } from "./Geometry3D";
+
+const Coord = { x, y, z };
+
+export { Coord, Geometry2D, Geometry3D };
