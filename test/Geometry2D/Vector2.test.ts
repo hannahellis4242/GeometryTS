@@ -37,7 +37,6 @@ describe("Vector2", () => {
   test("can create an y axis position vector", () => {
     const a = randomFloat(-2000, 2000);
     const [x, y] = yAxis2(a);
-    const [x, y] = yAxis2(a);
     expect(x).toBe(0);
     expect(y).toBe(a);
   });
@@ -161,7 +160,7 @@ describe("Vector2", () => {
     const y1 = randomFloat(-2000, 200);
     const x2 = randomFloat(-2000, 200);
     const y2 = randomFloat(-2000, 200);
-    const result = dot(vector2(x1, y1), vector2(x2, y2));
+    const result = dot2(vector2(x1, y1), vector2(x2, y2));
     expect(result).toBe(x1 * x2 + y1 * y2);
   });
   test("can get a vector from one position vector to another", () => {
@@ -178,7 +177,7 @@ describe("Vector2", () => {
     const a2 = randomFloat(-2000, 200);
     const b1 = randomFloat(-2000, 200);
     const b2 = randomFloat(-2000, 200);
-    const result = cross(vector2(a1, a2), vector2(b1, b2));
+    const result = cross2(vector2(a1, a2), vector2(b1, b2));
     expect(result).toBe(a1 * b2 - a2 * b1);
   });
 });

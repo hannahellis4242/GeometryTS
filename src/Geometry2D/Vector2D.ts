@@ -25,5 +25,3 @@ export const x = ([a, _]: Vector2): number => a;
 export const y = ([_, b]: Vector2): number => b;
 
 export const fromTo = (a: Vector2, b: Vector2): Vector2 => sub(b, a);
-export const dot = (a: Vector2, b: Vector2): number => a.x * b.x + a.y * b.y;
-export const cross = (a: Vector2, b: Vector2): number => a.x * b.y - a.y * b.x;
